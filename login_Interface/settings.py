@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+EXTERNAL_APP=[
+    'home'
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+INSTALLED_APPS += EXTERNAL_APP
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +60,7 @@ ROOT_URLCONF = 'login_Interface.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,6 +116,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+import os
+STATIC_URL='/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]
+STATIC_ROOT= os.path.join(BASE_DIR, 'assets')
 
 
 # Static files (CSS, JavaScript, Images)
