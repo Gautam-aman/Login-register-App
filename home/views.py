@@ -23,7 +23,7 @@ def Home(request):
             return redirect('/login/')
         else:
             login(request,user)
-            return redirect('home/')
+            return redirect('/home/')
         
         
         
@@ -33,6 +33,24 @@ def home_page(request):
     return render (request, 'home.html')
 
 def Register(request):
+    if request.method=="POST":
+        data= request.POST
+        username=data.get('username')
+        password=data.get('password')
+        
+        user =User.objects.filter(username=username)
+        if user.exists():
+            messages.error(request, 'Username already exist')
+            return redirect('/register/')
+        else:
+            user=User.objects.create(
+                username=username
+            )
+            user.set_password(password)
+            user.save()
+            messages.info(request, 'Account Created successfully')
+            return redirect('/login/')
+        
     return render(request , 'register.html')
 
 

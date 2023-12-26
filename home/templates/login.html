@@ -31,8 +31,17 @@
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{% static 'images/img-01.png'%}" alt="IMG">
 				</div>
+				
 
 				<form class="login100-form validate-form" method="post">
+					{% csrf_token %}
+					{% if messages %}
+					<div class="alert alert-primary" role="alert">
+					{% for message in messages %} 
+					{{message}}
+ 					{% endfor %}
+					</div>
+					{% endif %}
 					<span class="login100-form-title">
 						Member Login
 					</span>
